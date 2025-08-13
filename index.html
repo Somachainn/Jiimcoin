@@ -1,104 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <img src="https://imgur.com/a/2MAknTJ" alt="J" width="120" style="margin-bottom: 20px;" />
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #1a1a1a, #333);
-      color: #fff;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Laam DEX</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
-      text-align: center;
-    }
+  :root{
+    --bg1:#0f2027; --bg2:#203a43; --bg3:#2c5364;
+    --card:#1e2a38; --card2:#22354b;
+    --text:#e6eef6; --muted:#6a7a8c;
+    --brand:#ffd36b; --brand2:#ffca3a; --line:#395269;
+    --maxw: 760px;
+    --elw: 520px;
+    --rad: 16px;
+  }
 
-    h1 {
-      color: gold;
-      font-size: 3em;
-      margin-bottom: 20px;
-    }
+  *{box-sizing:border-box}
+  body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+    color: var(--text);
+    margin: 0;
+    min-height: 100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 32px 16px;
+  }
+  .app{
+    width:100%;
+    max-width: var(--maxw);
+    text-align: center;          /* => dhamaan gudaha .app waa bartamaha */
+  }
 
-    .description {
-      font-size: 1.2em;
-      color: #ddd;
-      line-height: 1.6;
-      margin-bottom: 40px;
-    }
+  h1 {
+    font-weight: 700;
+    font-size: 2.6rem;
+    margin: 0 0 18px 0;
+    color: var(--brand);
+    text-shadow: 0 0 10px var(--brand);
+  }
 
-    .token-table {
-      background-color: rgba(255, 215, 0, 0.05);
-      border: 1px solid gold;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 40px;
-      color: #fff;
-    }
+  .row { margin: 18px auto; max-width: var(--elw); }
 
-    .token-table table {
-      width: 100%;
-      border-collapse: collapse;
-    }
+  label{
+    display:block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--brand);
+    text-shadow: 0 0 4px var(--brand);
+  }
 
-    .token-table th, .token-table td {
-      padding: 12px;
-      border-bottom: 1px solid gold;
-      text-align: left;
-    }
+  input, select, button {
+    font-size: 1rem;
+    padding: 12px 16px;
+    width: 100%;
+    border-radius: var(--rad);
+    border: none;
+    transition: box-shadow .25s ease, background-color .25s ease, transform .04s ease;
+  }
+  input, select{
+    background: var(--card);
+    color: var(--text);
+    box-shadow: inset 0 0 8px var(--bg2);
+  }
+  input::placeholder{ color: var(--muted); }
+  select{ background: var(--card2); cursor: pointer; }
 
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
+  button{
+    background: var(--brand);
+    color: #071422;
+    font-weight: 800;
+    letter-spacing: .03em;
+    box-shadow: 0 6px 16px rgba(255,211,107,.55);
+    text-transform: uppercase;
+    cursor:pointer;
+  }
+  button:hover:not(:disabled){
+    background: var(--brand2);
+    box-shadow: 0 10px 26px rgba(255,202,58,.75);
+  }
+  button:active{ transform: translateY(1px); }
+  button:disabled{ background:#888; box-shadow:none; cursor:not-allowed; }
 
-    .socials a {
-      background-color: gold;
-      color: black;
-      padding: 12px 18px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+  .mono{
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    background: var(--card2);
+    padding: 12px 16px;
+    border-radius: var(--rad);
+    word-break: break-word;
+  }
 
-    .socials a:hover {
-      background-color: #ffd700;
-      transform: scale(1.05);
-    }
-  </style>
+  hr{
+    border:none;
+    border-top:1px solid var(--line);
+    margin:28px auto;
+    max-width: var(--elw);
+  }
+
+  h2{
+    font-weight:700;
+    color: var(--brand);
+    margin: 10px 0 6px 0;
+    text-shadow: 0 0 6px var(--brand);
+  }
+
+  /* Tables - all centered */
+  table{
+    width: 100%;
+    max-width: var(--elw);
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin: 12px auto 0 auto;
+  }
+  caption{
+    font-weight: 800;
+    color: var(--brand);
+    margin-bottom: 6px;
+    text-align:center;                /* center caption */
+    text-shadow: 0 0 6px var(--brand);
+  }
+  thead th{
+    color: var(--brand);
+    font-weight:700;
+    background: transparent;
+    text-align:center;                /* center headers */
+    padding: 6px 8px;
+  }
+  tbody td{
+    background: var(--card);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align:center;                /* center cells */
+  }
+  tbody tr:hover td{ background: var(--card2); }
+
+  #statusMsg{
+    min-height: 28px;
+    font-weight: 700;
+    color: var(--brand);
+    text-shadow: 0 0 8px var(--brand);
+    margin-top: 16px;
+  }
+
+  .grid2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: var(--elw);
+    margin: 0 auto;
+  }
+
+  @media (max-width:600px){
+    .grid2{ grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Jiim Coin</h1>
-    <p class="description">
-      Jiim Coin is a digital token built on the BRC-20 standard on the Bitcoin blockchain. It aims to become a stable, fast, and decentralized currency for commerce, loyalty systems, and peer-to-peer transactions. The token uses Bitcoin Ordinals technology for inscription and immutable storage.
-    </p>
+  <div class="app">
+    <h1>Laam DEX</h1>
 
-    <div class="token-table">
-      <h2>🔐 Token Overview</h2>
-      <table>
-        <tr><th>Token Name</th><td>Jiim Coin</td></tr>
-        <tr><th>Ticker</th><td>jiim</td></tr>
-        <tr><th>Blockchain</th><td>Bitcoin (BRC-20 Standard)</td></tr>
-        <tr><th>Total Supply</th><td>2,100,000</td></tr>
-        <tr><th>Mint Status</th><td>Minting Closed Permanently</td></tr>
-        <tr><th>Standard</th><td>BRC-20 via Ordinals</td></tr>
-        <tr><th>Decimals</th><td>Conceptual (not enforced)</td></tr>
-      </table>
+    <div class="row">
+      <label for="secretKeyInput">Secret Key</label>
+      <input type="password" id="secretKeyInput" placeholder="Enter your Stellar secret key" />
+    </div>
+    <div class="row">
+      <button id="loadAccountBtn">Load Account</button>
+    </div>
+    <div class="row">
+      <label>Public Key</label>
+      <div id="accountPubKey" class="mono">-</div>
+    </div>
+    <div class="row">
+      <button id="addTrustlineBtn" disabled>Add Trustline for Laam</button>
     </div>
 
-    <div class="socials">
-      <a href="https://t.me/jiimcoin" target="_blank">Telegram</a>
-      <a href="https://facebook.com/jiimcoin" target="_blank">Facebook</a>
-      <a href="https://twitter.com/jiimcoin" target="_blank">Twitter</a>
+    <hr />
+
+    <h2>Trade Direction</h2>
+    <div class="row">
+      <select id="tradePair">
+        <option value="xlm_to_laam">Buy Laam (Pay XLM)</option>
+        <option value="laam_to_xlm">Sell Laam (Get XLM)</option>
+      </select>
     </div>
+
+    <div class="grid2 row">
+      <div>
+        <label>Amount (<span id="amountLabel">XLM</span>)</label>
+        <input type="number" id="tradeAmount" placeholder="Enter amount" min="0" step="any" />
+      </div>
+      <div>
+        <label>Price (XLM per Laam)</label>
+        <input type="number" id="tradePrice" placeholder="Enter price" min="0" step="any" value="0.135" />
+      </div>
+    </div>
+    <div class="row">
+      <button id="placeOfferBtn">Place Offer</button>
+    </div>
+
+    <hr />
+
+    <h2>Market Offers</h2>
+    <table>
+      <caption>Buy Offers (Bids)</caption>
+      <thead>
+        <tr><th>Price (XLM/Laam)</th><th>Amount (Laam)</th><th>Total (XLM)</th></tr>
+      </thead>
+      <tbody id="buyOffers"></tbody>
+    </table>
+
+    <table>
+      <caption>Sell Offers (Asks)</caption>
+      <thead>
+        <tr><th>Price (XLM/Laam)</th><th>Amount (Laam)</th><th>Total (XLM)</th></tr>
+      </thead>
+      <tbody id="sellOffers"></tbody>
+    </table>
+
+    <div id="statusMsg" class="row"></div>
   </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/8.2.3/stellar-sdk.min.js"></script>
+  <script>
+    // ======= Stellar setup (MAINNET) =======
+    const server = new StellarSdk.Server('https://horizon.stellar.org');
+    const LAAM = new StellarSdk.Asset('Laam', 'GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64');
+    const XLM = StellarSdk.Asset.native();
+
+    // ======= UI refs =======
+    const secretInput = document.getElementById('secretKeyInput');
+    const loadBtn = document.getElementById('loadAccountBtn');
+    const pubKeyDisplay = document.getElementById('accountPubKey');
+    const addTrustlineBtn = document.getElementById('addTrustlineBtn');
+
+    const tradePairSelect = document.getElementById('tradePair');
+    const amountInput = document.getElementById('tradeAmount');
+    const priceInput = document.getElementById('tradePrice');
+    const placeOfferBtn = document.getElementById('placeOfferBtn');
+
+    const buyOffersTbody = document.getElementById('buyOffers');
+    const sellOffersTbody = document.getElementById('sellOffers');
+    const statusMsg = document.getElementById('statusMsg');
+    const amountLabel = document.getElementById('amountLabel');
+
+    // ======= State =======
+    let activeKeypair = null;
+    let accountData = null;
+
+    // ======= Helpers =======
+    function setStatus(msg=''){ statusMsg.textContent = msg; }
+    function updateAmountLabel() {
+      amountLabel.textContent = tradePairSelect.value === 'xlm_to_laam' ? 'XLM' : 'Laam';
+    }
+    function clearTables(){
+      buyOffersTbody.innerHTML = '';
+      sellOffersTbody.innerHTML = '';
+    }
+    function invertPrice(p){
+      const x = parseFloat(p);
+      return (!isFinite(x) || x === 0) ? 0 : 1 / x;
+    }
+
+    // ======= Load account =======
+    async function loadAccount(){
+      const secret = secretInput.value.trim();
+      if(!secret){ alert('Please enter your secret key'); return; }
+      try{
+        activeKeypair = StellarSdk.Keypair.fromSecret(secret);
+        pubKeyDisplay.textContent = activeKeypair.publicKey();
+        setStatus('Loading account data...');
+        accountData = await server.loadAccount(activeKeypair.publicKey());
+        setStatus('Account loaded successfully.');
+        addTrustlineBtn.disabled = false;
+        fetchOrderbook(); // refresh book on load
+      }catch(err){
+        console.error(err);
+        alert('Invalid secret key or unable to load account.');
+        setStatus('');
+        activeKeypair = null; accountData = null;
+        pubKeyDisplay.textContent = '-';
+        addTrustlineBtn.disabled = true;
+        clearTables();
+      }
+    }
+
+    // ======= Add trustline =======
+    async function addTrustline(){
+      if(!activeKeypair || !accountData){ alert('Load your account first.'); return; }
+
+      // skip if exists already
+      const exists = accountData.balances.some(
+        b => b.asset_code === LAAM.code && b.asset_issuer === LAAM.issuer
+      );
+      if(exists){ alert('Trustline for Laam already exists.'); return; }
+
+      try{
+        setStatus('Submitting trustline transaction...');
+        const fee = await server.fetchBaseFee();
+        const tx = new StellarSdk.TransactionBuilder(accountData, {
+          fee, networkPassphrase: StellarSdk.Networks.PUBLIC
+        })
+        .addOperation(StellarSdk.Operation.changeTrust({ asset: LAAM }))
+        .setTimeout(30)
+        .build();
+
+        tx.sign(activeKeypair);
+        const res = await server.submitTransaction(tx);
+        setStatus('Trustline added! Tx: ' + res.hash);
+
+        // reload account after trustline
+        accountData = await server.loadAccount(activeKeypair.publicKey());
+      }catch(err){
+        console.error(err);
+        setStatus('Error adding trustline: ' + err.message);
+      }
+    }
+
+    // ======= Fetch orderbook (Laam <-> XLM only) =======
+    async function fetchOrderbook(){
+      clearTables();
+      setStatus('Loading orderbook...');
+      // show book for both directions consistently:
+      // We always request orderbook(selling, buying) based on the dropdown
+      let sellingAsset, buyingAsset;
+      if (tradePairSelect.value === 'xlm_to_laam') {
+        sellingAsset = XLM;  // people selling XLM
+        buyingAsset  = LAAM; // to buy LAAM
+      } else {
+        sellingAsset = LAAM; // people selling LAAM
+        buyingAsset  = XLM;  // to buy XLM
+      }
+
+      try{
+        const ob = await server.orderbook(sellingAsset, buyingAsset).call();
+
+        // Horizon price == selling / buying (Laam per XLM or XLM per Laam depending on call)
+        // We want to DISPLAY as XLM per Laam always => invert
+        function rowHTML(priceDisplay, amtLaam){
+          const totalXlm = priceDisplay * amtLaam;
+          return `<tr>
+              <td title="Exact price: ${priceDisplay}">${priceDisplay.toFixed(7)}</td>
+              <td>${amtLaam.toFixed(7)}</td>
+              <td>${totalXlm.toFixed(7)}</td>
+            </tr>`;
+        }
+
+        // Bids
+        if(ob.bids && ob.bids.length){
+          buyOffersTbody.innerHTML = ob.bids.map(b=>{
+            const px = invertPrice(b.price);              // XLM per Laam
+            const amt = parseFloat(b.amount);             // Laam
+            return rowHTML(px, amt);
+          }).join('');
+        }else{
+          buyOffersTbody.innerHTML = '<tr><td colspan="3" style="opacity:.7">No buy offers</td></tr>';
+        }
+
+        // Asks
+        if(ob.asks && ob.asks.length){
+          sellOffersTbody.innerHTML = ob.asks.map(a=>{
+            const px = invertPrice(a.price);              // XLM per Laam
+            const amt = parseFloat(a.amount);             // Laam
+            return rowHTML(px, amt);
+          }).join('');
+        }else{
+          sellOffersTbody.innerHTML = '<tr><td colspan="3" style="opacity:.7">No sell offers</td></tr>';
+        }
+
+        setStatus('');
+      }catch(err){
+        console.error(err);
+        setStatus('Error loading offers.');
+        buyOffersTbody.innerHTML = '<tr><td colspan="3" style="color:#f66">Error</td></tr>';
+        sellOffersTbody.innerHTML = '<tr><td colspan="3" style="color:#f66">Error</td></tr>';
+      }
+    }
+
+    // ======= Place offer =======
+    async function placeOffer(){
+      if(!activeKeypair){ alert('Load your secret key first.'); return; }
+
+      const amount = parseFloat(amountInput.value);
+      const priceUi = parseFloat(priceInput.value); // XLM per Laam from UI
+      if(!isFinite(amount) || amount<=0){ alert('Enter a valid amount.'); return; }
+      if(!isFinite(priceUi) || priceUi<=0){ alert('Enter a valid price.'); return; }
+
+      // Horizon expects "selling per buying". We send price as Laam per XLM,
+      // so convert from XLM/Laam (UI) => Laam/XLM (Horizon)
+      const priceLaamPerXlm = 1 / priceUi;
+
+      let sellingAsset, buyingAsset;
+      // For manageSellOffer:
+      // - If BUY Laam: user sells XLM and buys LAAM
+      // - If SELL Laam: user sells LAAM and buys XLM
+      if (tradePairSelect.value === 'xlm_to_laam') {
+        sellingAsset = XLM;
+        buyingAsset  = LAAM;
+      } else {
+        sellingAsset = LAAM;
+        buyingAsset  = XLM;
+      }
+
+      try{
+        const account = await server.loadAccount(activeKeypair.publicKey());
+        const fee = await server.fetchBaseFee();
+
+        const tx = new StellarSdk.TransactionBuilder(account, {
+          fee, networkPassphrase: StellarSdk.Networks.PUBLIC
+        })
+        .addOperation(StellarSdk.Operation.manageSellOffer({
+          selling: sellingAsset,
+          buying:  buyingAsset,
+          amount: amount.toFixed(7),
+          price:  priceLaamPerXlm.toString(), // IMPORTANT: send Laam per XLM
+          offerId: '0',
+        }))
+        .setTimeout(30)
+        .build();
+
+        tx.sign(activeKeypair);
+        setStatus('Submitting transaction...');
+        const res = await server.submitTransaction(tx);
+        setStatus('Offer placed. Tx: ' + res.hash);
+        fetchOrderbook();
+      }catch(err){
+        console.error(err);
+        setStatus('Error placing offer: ' + (err?.response?.data?.extras?.result_codes?.operations || err.message));
+      }
+    }
+
+    // ======= Total helper text =======
+    function calculateTotal(){
+      const amount = parseFloat(amountInput.value);
+      const price = parseFloat(priceInput.value); // XLM per Laam
+      if(!isFinite(amount) || !isFinite(price) || amount<=0 || price<=0){
+        setStatus('');
+        return;
+      }
+      if (tradePairSelect.value === 'xlm_to_laam') {
+        // amount input waa XLM aad bixineyso
+        setStatus(`You pay approx ${amount.toFixed(7)} XLM to buy Laam`);
+      } else {
+        // amount input waa Laam aad iibinayso
+        const total = amount * price;
+        setStatus(`You will receive approx ${total.toFixed(7)} XLM by selling Laam`);
+      }
+    }
+
+    // ======= Events =======
+    loadBtn.addEventListener('click', loadAccount);
+    addTrustlineBtn.addEventListener('click', addTrustline);
+    placeOfferBtn.addEventListener('click', placeOffer);
+
+    tradePairSelect.addEventListener('change', ()=>{ updateAmountLabel(); fetchOrderbook(); calculateTotal(); });
+    amountInput.addEventListener('input', calculateTotal);
+    priceInput.addEventListener('input', calculateTotal);
+
+    // ======= Init =======
+    updateAmountLabel();
+    fetchOrderbook();
+  </script>
 </body>
-  </html>
+</html>
