@@ -347,7 +347,7 @@
               </table>
           </div>
           <div id="overviewContent" style="display:none; padding: 10px 20px 20px;">
-            <div style="font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 10px;">0.13499 XLM</div>
+            <div style="font-size: 2.5rem; font-weight: bold; text-align: center; margin-bottom: 10px;"><span id="overviewLaamPriceXLM">0.00000</span> XLM</div>
             <div style="text-align: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 20px;">Laam price August 14, 2025 04:51 AM</div>
             <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
               <button class="btn-secondary" style="flex: 0 1 auto; padding: 8px 15px; border-radius: 8px;">1D</button>
@@ -486,6 +486,7 @@ async function refreshBalances() {
             if (!isNaN(laamPriceInXLM) && laamPriceInXLM > 0) {
                 laamPriceEl.textContent = (laamPriceInXLM * xlmToUsdRate).toFixed(4);
                 laamUsdEl.textContent = (laam * laamPriceInXLM * xlmToUsdRate).toFixed(2);
+                document.getElementById("overviewLaamPriceXLM").textContent = laamPriceInXLM.toFixed(5);
             } else {
                 laamPriceEl.textContent = 'N/A';
                 laamUsdEl.textContent = 'N/A';
