@@ -398,6 +398,8 @@ const ENCRYPTED_KEY_NAME = 'laam_dex_wallet_v4';
 let keypair = null;
 let account = null;
 let balTimer = null;
+let asks = [];
+let bids = [];
 
 // === UI ELEMENTS ===
 const authSection = document.getElementById('authSection');
@@ -443,8 +445,8 @@ async function login(secret) {
         document.getElementById('pubKey').textContent = keypair.publicKey();
         showView('loggedIn');
         console.log('Account loaded successfully.');
-        await refreshBalances();
         await loadOrderbook();
+        await refreshBalances();
         if (balTimer) clearInterval(balTimer);
         balTimer = setInterval(refreshBalances, 15000);
     } catch (e) {
@@ -482,14 +484,20 @@ async function refreshBalances() {
 
             // Assuming Laam price is based on the current orderbook spread (lowest ask)
             // This is a simplification; a real DEX would have a more robust way to determine Laam's USD value
-            const laamPriceInXLM = asks.length > 0 ? parseFloat(asks[0].price) : 0; // Use the lowest ask as Laam price in XLM
+            const laamPriceInXLM = asks.length > 0 ? parseFloat(asks[0].price) : 0;
+            // Ensure laamPriceInXLM is not 0 before calculating USD value
+            if (laamPriceInXLM === 0 && parseFloat(laamPriceEl.textContent) > 0) {
+                // If asks is empty but we have a previous Laam price, use it for calculation
+                laamPriceInXLM = parseFloat(laamPriceEl.textContent) / xlmToUsdRate; // Convert USD price back to XLM
+            }
+
             if (!isNaN(laamPriceInXLM) && laamPriceInXLM > 0) {
                 laamPriceEl.textContent = (laamPriceInXLM * xlmToUsdRate).toFixed(4);
                 laamUsdEl.textContent = (laam * laamPriceInXLM * xlmToUsdRate).toFixed(2);
                 document.getElementById("overviewLaamPriceXLM").textContent = laamPriceInXLM.toFixed(5);
             } else {
-                laamPriceEl.textContent = 'N/A';
-                laamUsdEl.textContent = 'N/A';
+                laamPriceEl.textContent = (0.06).toFixed(4); // Default to 0.06 if no ask price is available
+                laamUsdEl.textContent = (laam * 0.06 * xlmToUsdRate).toFixed(2); // Calculate with default price
             }
         } else {
             xlmPriceEl.textContent = 'N/A';
@@ -618,6 +626,11 @@ async function loadOrderbook(){
     console.log("Loading orderbook...");
     try {
         const ob = await server.orderbook(LAAM, XLM).limit(10).call();
+        
+        // Store globally for use in price calculations
+        asks = ob.asks;
+        bids = ob.bids;
+        
         const rowHTML = (p, a, t, type) => `<tr class="${type}-row"><td>${fmt(a, 2)}</td><td>${fmt(p)}</td><td>${fmt(t, 4)}</td></tr>`;
         
         asksBody.innerHTML = ob.asks.length ? ob.asks.slice().reverse().map(a => rowHTML(a.price, a.amount, a.price * a.amount, 'ask')).join('') : `<tr><td colspan="3" class="muted">No sell offers</td></tr>`;
@@ -630,6 +643,15 @@ async function loadOrderbook(){
         } else {
             spreadValue.textContent = '-';
         }
+        
+        // Update Laam price in overview after loading orderbook
+        if (asks.length > 0) {
+            const laamPriceInXLM = parseFloat(asks[0].price);
+            document.getElementById("overviewLaamPriceXLM").textContent = laamPriceInXLM.toFixed(5);
+        }
+        
+        // Refresh balances to update USD calculations
+        await refreshBalances();
     } catch (e) { 
         console.error('Orderbook Error:', e);
         asksBody.innerHTML = `<tr><td colspan="3" class="muted">Error loading offers</td></tr>`;
@@ -677,8 +699,8 @@ async function placeOffer(isBuy) {
         await server.submitTransaction(tx);
         alert(`${isBuy ? 'Buy' : 'Sell'} offer placed successfully.`);
         closeTradeModal();
-        await refreshBalances();
         await loadOrderbook();
+        await refreshBalances();
     } catch (e) {
         alert(`Offer Error: ` + (e?.response?.data?.extras?.result_codes?.operations?.[0] || e.message));
     }
