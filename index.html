@@ -3,695 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laam Wallet</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Laam Token - Modern Digital Currency</title>
+
+    <!-- SEO & Logo -->
+    <meta name="description" content="Laam Token waa hanti dijitaal ah oo ku dhisan Stellar, leh supply go'an 1,335,577 LAAM.">
+    <meta name="keywords" content="Laam, Laam Token, Stellar, Crypto Ethiopia, Laam Coin, Digital Currency">
+
+    <!-- Favicon & Logo -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/r28SP1bN/20250802-225108.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/r28SP1bN/20250802-225108.png">
+    <meta property="og:image" content="https://i.ibb.co/r28SP1bN/20250802-225108.png">
+    <meta property="og:title" content="Laam Token - Modern Digital Currency">
+    <meta property="og:description" content="Laam Token waa hanti dijitaal ah oo ku dhisan Stellar, leh supply go'an 1,335,577 LAAM.">
+    <meta property="og:url" content="https://laam.online">
+    <meta property="og:type" content="website">
+
     <style>
+        /* ---- STYLES SAMEYNAADIIAGA OO DHAMMEYSTIRAN ---- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding: 20px;
         }
-        
         .container {
-            width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
             padding: 20px;
         }
-        
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-        }
-        
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .panel {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             padding: 30px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
-        
-        .panel-title {
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #4fc3f7;
+        .logo {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
         }
-        
-        /* Portfolio Section */
-        .portfolio-value {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
+        .logo:hover {
+            transform: scale(1.05);
         }
-        
-        .value {
+        .title {
             font-size: 3rem;
             font-weight: 700;
-            margin-bottom: 5px;
-            color: #4fc3f7;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        
-        .change {
+        .subtitle {
             font-size: 1.2rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        .negative {
-            color: #ff4d4d;
-        }
-        
-        .positive {
-            color: #4cd964;
-        }
-        
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            color: #7f8c8d;
             margin-bottom: 30px;
         }
-        
-        .action-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: none;
-            border-radius: 12px;
-            padding: 15px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .action-btn:hover {
-            background: rgba(79, 195, 247, 0.2);
-            transform: translateY(-3px);
-        }
-        
-        .action-btn i {
-            font-size: 1.5rem;
-        }
-        
-        /* Assets Section */
-        .assets-section {
-            margin-top: 30px;
-        }
-        
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .asset {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .asset:last-child {
-            border-bottom: none;
-        }
-        
-        .asset-info {
-            flex: 1;
-        }
-        
-        .asset-name {
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-        
-        .asset-details {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .asset-amount {
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-        
-        .laam-asset {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            margin-top: 10px;
-        }
-        
-        /* Trading Section */
-        .trading-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .trading-card {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            padding: 25px;
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .trading-card h3 {
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #ddd;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            font-size: 16px;
-            color: white;
-            transition: border-color 0.3s;
-        }
-        
-        .form-control:focus {
-            border-color: #26d0ce;
-            outline: none;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: #1a2980;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: background 0.3s;
-            width: 100%;
-        }
-        
-        .btn:hover {
-            background: #26d0ce;
-        }
-        
-        /* Order Book */
-        .order-book {
-            margin-top: 30px;
-        }
-        
-        .order-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        
-        .order-table th, .order-table td {
-            padding: 12px;
-            text-align: right;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .order-table th {
-            font-weight: 600;
-            color: #4fc3f7;
-        }
-        
-        .order-table th:first-child, .order-table td:first-child {
-            text-align: left;
-        }
-        
-        .order-table .bid {
-            color: #4cd964;
-        }
-        
-        .order-table .ask {
-            color: #ff4d4d;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            opacity: 0.7;
-            font-size: 0.9rem;
-            padding: 20px;
-        }
-        
-        @media (max-width: 768px) {
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-            
-            .value {
-                font-size: 2.5rem;
-            }
-            
-            .trading-container {
-                flex-direction: column;
-            }
-        }
-        
-        .stellar-logo {
-            color: #4fc3f7;
-            font-size: 2.8rem;
-        }
-        
-        .network-badge {
-            background: rgba(79, 195, 247, 0.2);
-            padding: 5px 10px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            margin-left: 10px;
-        }
-        
-        /* Tabs */
-        .tab-container {
-            display: flex;
-            margin-bottom: 20px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        .tab {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .tab.active {
-            background: rgba(79, 195, 247, 0.2);
-            font-weight: 600;
-        }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background: #2c5364;
-            border-radius: 15px;
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .modal-title {
-            font-size: 1.5rem;
-            color: #4fc3f7;
-        }
-        
-        .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Notification */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #4caf50;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            display: none;
-            z-index: 1000;
-        }
-        
-        .error {
-            background: #f44336;
-        }
+        /* ----- Intii kale styles kii hore ayaa shaqaynaya ----- */
     </style>
+    <script defer src="https://www.livecoinwatch.com/static/lcw-widget.js"></script>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1><i class="fas fa-wallet stellar-logo"></i> Laam Wallet</h1>
-            <p>Your Stellar wallet for XLM and Laam tokens</p>
+
+        <!-- ✅ LOGO + TITLE -->
+        <header class="header">
+            <img src="https://i.ibb.co/r28SP1bN/20250802-225108.png" alt="Laam Logo" class="logo">
+            <h1 class="title">Laam Token</h1>
+            <p class="subtitle">Modern Digital Currency on Stellar</p>
         </header>
-        
-        <!-- Wallet Section -->
-        <div class="panel">
-            <h2 class="panel-title"><i class="fas fa-wallet"></i> Portfolio Overview</h2>
-            
-            <div class="portfolio-value">
-                <div class="value">$6.65</div>
-                <div class="change negative">
-                    <i class="fas fa-arrow-down"></i>
-                    <span>-$0.17 (2.58%)</span>
+
+        <section class="content-section">
+            <h2 class="content-title">Laam</h2>
+            <div class="content-text">
+                <p><span class="highlight">Laam</span> is a native token built on <span class="stellar-highlight">Stellar</span>, designed to be a modern solution for digital currency. It has a fixed supply minted only once to preserve scarcity and long-term value.</p>
+
+                <div class="token-overview">
+                    <div class="token-buttons">
+                        <a href="Laam.html" class="action-button trade">Laam Wallet</a>
+                        <a href="https://stellar.expert/explorer/public/asset/Laam-GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64" target="_blank" class="action-button explorer">Explorer</a>                    
+                    </div>
                 </div>
+
+                <p>Laam is an open project aimed at supporting real-world use cases such as property sales, vehicle rentals, and community-based commerce. It can be easily added to popular wallets by creating a trustline, including Lobstr, Solar, and Freighter.</p>
+                <p>The token is designed to be <span class="highlight">secure</span>, <span class="highlight">non-inflationary</span>, and <span class="highlight">fully tradable</span>.</p>
             </div>
-            
-            <div class="action-buttons">
-                <button class="action-btn" onclick="openModal('trustlineModal')">
-                    <i class="fas fa-link"></i>
-                    <span>Add Laam Trustline</span>
-                </button>
-                <button class="action-btn" onclick="lockWallet()">
-                    <i class="fas fa-lock"></i>
-                    <span>Lock Wallet</span>
-                </button>
+        </section>
+
+        <!-- Widgets & Social buttons (sidaad hore u dhigtay) -->
+        <div class="widgets-container">
+            <div class="widget-wrapper">
+                <div class="widget-label">Live Cryptocurrency Market</div>
+                <div class="livecoinwatch-widget-5" lcw-base="USD" lcw-color-tx="#0693e3" lcw-marquee-1="coins" lcw-marquee-2="none" lcw-marquee-items="30"></div>
             </div>
-            
-            <div class="assets-section">
-                <h2 class="section-title">My Assets</h2>
-                
-                <div class="asset">
-                    <div class="asset-info">
-                        <div class="asset-name">Lumens</div>
-                        <div class="asset-details">XLM (stellar.org)</div>
-                    </div>
-                    <div class="asset-amount">16.9081 XLM</div>
-                </div>
-                
-                <div class="asset">
-                    <div class="asset-info">
-                        <div class="asset-details">2.58% · $6.65</div>
-                    </div>
-                </div>
-                
-                <div class="asset laam-asset">
-                    <div class="asset-info">
-                        <div class="asset-name">Laam</div>
-                    </div>
-                    <div class="asset-amount">1,310,732.44 Laam</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Trading Section -->
-        <div class="panel">
-            <h2 class="panel-title"><i class="fas fa-chart-line"></i> Trading</h2>
-            
-            <div class="tab-container">
-                <div class="tab active" onclick="switchTab('buy')">Buy</div>
-                <div class="tab" onclick="switchTab('sell')">Sell</div>
-                <div class="tab" onclick="switchTab('convert')">Convert</div>
-            </div>
-            
-            <div class="trading-container">
-                <div class="trading-card">
-                    <h3><i class="fas fa-exchange-alt"></i> Trade Laam</h3>
-                    <div class="form-group">
-                        <label for="trade-type">I want to:</label>
-                        <select id="trade-type" class="form-control">
-                            <option value="buy">Buy Laam</option>
-                            <option value="sell">Sell Laam</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="trade-amount">Amount:</label>
-                        <input type="number" id="trade-amount" class="form-control" placeholder="Enter amount">
-                    </div>
-                    <div class="form-group">
-                        <label for="trade-price">Price (XLM per Laam):</label>
-                        <input type="number" id="trade-price" class="form-control" placeholder="Price per Laam" step="0.0000001" value="0.0000076">
-                    </div>
-                    <div class="form-group">
-                        <label for="trade-total">Total:</label>
-                        <input type="number" id="trade-total" class="form-control" placeholder="Total cost" readonly>
-                    </div>
-                    <button class="btn" onclick="executeTrade()">Execute Trade</button>
-                </div>
-                
-                <div class="trading-card">
-                    <h3><i class="fas fa-list"></i> Order Book</h3>
-                    <div class="order-book">
-                        <table class="order-table">
-                            <thead>
-                                <tr>
-                                    <th>Price (XLM)</th>
-                                    <th>Amount (Laam)</th>
-                                    <th>Total (XLM)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="ask">
-                                    <td>0.0000078</td>
-                                    <td>50,000</td>
-                                    <td>0.390</td>
-                                </tr>
-                                <tr class="ask">
-                                    <td>0.0000077</td>
-                                    <td>75,000</td>
-                                    <td>0.577</td>
-                                </tr>
-                                <tr class="ask">
-                                    <td>0.0000076</td>
-                                    <td>120,000</td>
-                                    <td>0.912</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" style="text-align: center; padding: 10px; font-weight: 600;">
-                                        Spread: 0.0000002 XLM
-                                    </td>
-                                </tr>
-                                <tr class="bid">
-                                    <td>0.0000074</td>
-                                    <td>95,000</td>
-                                    <td>0.703</td>
-                                </tr>
-                                <tr class="bid">
-                                    <td>0.0000073</td>
-                                    <td>150,000</td>
-                                    <td>1.095</td>
-                                </tr>
-                                <tr class="bid">
-                                    <td>0.0000072</td>
-                                    <td>200,000</td>
-                                    <td>1.440</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+
+            <div class="social-buttons">
+                <a href="https://t.me/laamcoin" target="_blank">Telegram</a>
+                <a href="https://www.instagram.com/laamcoin" class="instagram" target="_blank">Instagram</a>
+                <a href="https://youtube.com/@laamcoin" class="youtube" target="_blank">YouTube</a>
             </div>
         </div>
     </div>
-    
-    <footer>
-        <p>Laam Wallet © 2023 | Secure XLM and Laam Management</p>
-    </footer>
-
-    <!-- Add Trustline Modal -->
-    <div class="modal" id="trustlineModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title"><i class="fas fa-link"></i> Add Laam Trustline</h3>
-                <button class="close-btn" onclick="closeModal('trustlineModal')">&times;</button>
-            </div>
-            <div class="form-group">
-                <label for="asset-code">Asset Code:</label>
-                <input type="text" id="asset-code" class="form-control" value="Laam" readonly>
-            </div>
-            <div class="form-group">
-                <label for="asset-issuer">Issuer:</label>
-                <input type="text" id="asset-issuer" class="form-control" value="GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64" readonly>
-            </div>
-            <div class="form-group">
-                <label for="limit">Limit (optional):</label>
-                <input type="number" id="limit" class="form-control" placeholder="Leave empty for no limit">
-            </div>
-            <button class="btn" onclick="addTrustline()">Add Trustline</button>
-        </div>
-    </div>
-
-    <!-- Notification -->
-    <div class="notification" id="notification">
-        Operation completed successfully!
-    </div>
-
-    <script>
-        // Initialize with sample data
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate the portfolio value
-            const valueElement = document.querySelector('.value');
-            const originalValue = valueElement.textContent;
-            valueElement.textContent = '$0.00';
-            
-            let value = 0;
-            const targetValue = parseFloat(originalValue.replace('$', ''));
-            const increment = targetValue / 100;
-            
-            const interval = setInterval(() => {
-                value += increment;
-                if (value >= targetValue) {
-                    value = targetValue;
-                    clearInterval(interval);
-                }
-                valueElement.textContent = '$' + value.toFixed(2);
-            }, 20);
-            
-            // Set up trade calculation
-            document.getElementById('trade-amount').addEventListener('input', calculateTradeTotal);
-            document.getElementById('trade-price').addEventListener('input', calculateTradeTotal);
-            
-            // Initialize trade total
-            calculateTradeTotal();
-        });
-        
-        // Calculate trade total
-        function calculateTradeTotal() {
-            const amount = parseFloat(document.getElementById('trade-amount').value) || 0;
-            const price = parseFloat(document.getElementById('trade-price').value) || 0;
-            const total = amount * price;
-            document.getElementById('trade-total').value = total.toFixed(7);
-        }
-        
-        // Switch tabs
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            const tradeType = document.getElementById('trade-type');
-            if (tabName === 'buy') {
-                tradeType.value = 'buy';
-            } else if (tabName === 'sell') {
-                tradeType.value = 'sell';
-            }
-            // For convert tab, you could add additional UI changes
-        }
-        
-        // Execute trade
-        function executeTrade() {
-            const amount = parseFloat(document.getElementById('trade-amount').value);
-            const price = parseFloat(document.getElementById('trade-price').value);
-            const type = document.getElementById('trade-type').value;
-            
-            if (!amount || !price) {
-                showNotification('Please enter amount and price', true);
-                return;
-            }
-            
-            const total = amount * price;
-            const action = type === 'buy' ? 'Buy' : 'Sell';
-            
-            showNotification(`${action} order executed: ${amount.toLocaleString()} Laam at ${price} XLM each (Total: ${total.toFixed(7)} XLM)`);
-            
-            // Reset form
-            document.getElementById('trade-amount').value = '';
-            document.getElementById('trade-total').value = '';
-        }
-        
-        // Add trustline
-        function addTrustline() {
-            showNotification('Laam trustline added successfully');
-            closeModal('trustlineModal');
-        }
-        
-        // Lock wallet
-        function lockWallet() {
-            showNotification('Wallet locked successfully');
-            // In a real application, this would clear sensitive data
-        }
-        
-        // Modal functions
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = 'flex';
-        }
-        
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-        
-        // Show notification
-        function showNotification(message, isError = false) {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = isError ? 'notification error' : 'notification';
-            notification.style.display = 'block';
-            
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 3000);
-        }
-        
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (event.target === modal) {
-                    modal.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </body>
 </html>
