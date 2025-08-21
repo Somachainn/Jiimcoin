@@ -90,21 +90,70 @@
 
                 <div class="token-overview">
           <div class="token-buttons">
-            <!-- Wallet button with icon -->
-            <a href="Laam.html" class="btn btn-wallet" aria-label="Open Laam Wallet">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M21 7h-1V6a2 2 0 0 0-2-2H5a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-4-1v1H5a1 1 0 0 1 0-2h11a1 1 0 0 1 1 1Zm4 11H5a1 1 0 0 1-1-1V9h17v8Zm-3-4a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
-              </svg>
-              Laam Wallet
-            </a>
+         <style>
+/* ---- BUTTONS STYLE ---- */
+.token-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
 
-            <!-- Explorer button -->
-            <a href="https://stellar.expert/explorer/public/asset/Laam-GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64"
-               target="_blank" rel="noopener" class="btn btn-explorer">
-              Explorer
-            </a>
-          </div>
-        </div>
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border-radius: 28px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  transition: all .25s ease;
+  box-shadow: 0 5px 14px rgba(0,0,0,.18);
+}
+
+/* Wallet button */
+.btn-wallet {
+  background: linear-gradient(135deg, #29b6f6 0%, #26a69a 100%);
+  color: #fff;
+  border: none;
+}
+.btn-wallet:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+}
+.btn-wallet img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+/* Explorer button */
+.btn-explorer {
+  background: #ffd54f;
+  color: #2c3e50;
+  border: 2px solid #fbc02d;
+}
+.btn-explorer:hover {
+  filter: brightness(0.97);
+  transform: translateY(-2px);
+}
+</style>
+
+<div class="token-buttons">
+  <!-- ✅ Wallet button with custom image icon -->
+  <a href="Laam.html" class="btn btn-wallet" aria-label="Open Laam Wallet">
+    <img src="https://i.ibb.co/tPQZ1XN0/20250821-231616.jpg" alt="Wallet Icon">
+    Laam Wallet
+  </a>
+
+  <!-- ✅ Explorer button -->
+  <a href="https://stellar.expert/explorer/public/asset/Laam-GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64"
+     target="_blank" rel="noopener" class="btn btn-explorer">
+    Explorer
+  </a>
+</div>
 
                 <p>Laam is an open project aimed at supporting real-world use cases such as property sales, vehicle rentals, and community-based commerce. It can be easily added to popular wallets by creating a trustline, including Lobstr, Solar, and Freighter.</p>
                 <p>The token is designed to be <span class="highlight">secure</span>, <span class="highlight">non-inflationary</span>, and <span class="highlight">fully tradable</span>.</p>
