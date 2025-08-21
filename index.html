@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETB/XLM P2P Exchange</title>
+    <title>P2P Exchange - Stellar XLM & ETB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,13 +14,10 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: #333;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
             min-height: 100vh;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
         
         .container {
@@ -33,12 +30,15 @@
             text-align: center;
             margin-bottom: 30px;
             padding: 20px;
-            color: white;
         }
         
         header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
         }
         
         header p {
@@ -46,6 +46,110 @@
             opacity: 0.9;
         }
         
+        .panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .panel-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #4fc3f7;
+        }
+        
+        /* Stellar Wallet Section */
+        .wallet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .wallet-address {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px 15px;
+            border-radius: 12px;
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #4fc3f7;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .balance-section {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+        }
+        
+        .balance-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 10px;
+        }
+        
+        .balance-amount {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #4fc3f7;
+            margin-bottom: 5px;
+        }
+        
+        .balance-fiat {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .action-btn:hover {
+            background: rgba(79, 195, 247, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .action-btn i {
+            font-size: 1.5rem;
+        }
+        
+        /* P2P Exchange Section */
         .exchange-container {
             display: flex;
             flex-wrap: wrap;
@@ -53,20 +157,18 @@
             margin-bottom: 30px;
         }
         
-        .card {
-            background: white;
+        .exchange-card {
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             padding: 25px;
             flex: 1;
             min-width: 300px;
         }
         
-        .card h2 {
-            color: #1a2980;
+        .exchange-card h3 {
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -80,15 +182,17 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #444;
+            color: #ddd;
         }
         
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 2px solid #ddd;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             font-size: 16px;
+            color: white;
             transition: border-color 0.3s;
         }
         
@@ -115,19 +219,37 @@
             background: #26d0ce;
         }
         
-        .offer-list {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            padding: 25px;
-            margin-bottom: 30px;
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
         }
         
-        .offer-list h2 {
-            color: #1a2980;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
+        .payment-method {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .payment-icon {
+            font-size: 2rem;
+            width: 40px;
+        }
+        
+        .payment-name {
+            font-weight: 600;
+        }
+        
+        /* Offers List */
+        .offers-list {
+            margin-top: 30px;
         }
         
         .offer {
@@ -135,11 +257,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .offer:last-child {
-            border-bottom: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
         
         .offer-details {
@@ -148,7 +269,8 @@
         
         .offer-name {
             font-weight: 600;
-            color: #1a2980;
+            color: #4fc3f7;
+            margin-bottom: 5px;
         }
         
         .offer-rate {
@@ -182,188 +304,349 @@
         
         footer {
             text-align: center;
-            color: white;
-            margin-top: auto;
-            padding: 20px;
+            margin-top: 30px;
+            opacity: 0.7;
             font-size: 0.9rem;
-            opacity: 0.8;
+            padding: 20px;
         }
         
         @media (max-width: 768px) {
+            .action-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .balance-amount {
+                font-size: 2.5rem;
+            }
+            
+            .wallet-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .wallet-address {
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            
             .exchange-container {
                 flex-direction: column;
             }
-            
-            .card {
-                width: 100%;
-            }
         }
         
-        .currency-badge {
-            background: #f0f9ff;
+        .stellar-logo {
+            color: #4fc3f7;
+            font-size: 2.8rem;
+        }
+        
+        .ethereum-logo {
+            color: #26d0ce;
+            font-size: 2.8rem;
+        }
+        
+        .network-badge {
+            background: rgba(79, 195, 247, 0.2);
             padding: 5px 10px;
-            border-radius: 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+        
+        .tab-container {
+            display: flex;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .tab.active {
+            background: rgba(79, 195, 247, 0.2);
             font-weight: 600;
-            color: #1a2980;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin-right: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-exchange-alt"></i> ETB/XLM P2P Exchange</h1>
-            <p>Trade Ethiopian Birr and Stellar Lumens directly with other users</p>
+            <h1><i class="fas fa-exchange-alt stellar-logo"></i> P2P Exchange Platform</h1>
+            <p>Trade XLM with Ethiopian Birr using popular payment methods</p>
         </header>
         
-        <div class="exchange-container">
-            <div class="card">
-                <h2><i class="fas fa-plus-circle"></i> Create Offer</h2>
-                <div class="form-group">
-                    <label for="offer-type">I want to:</label>
-                    <select id="offer-type" class="form-control">
-                        <option value="buy">Buy XLM with ETB</option>
-                        <option value="sell">Sell XLM for ETB</option>
-                    </select>
+        <!-- Stellar Wallet Section -->
+        <div class="panel">
+            <h2 class="panel-title"><i class="fas fa-wallet"></i> Stellar Wallet</h2>
+            
+            <div class="wallet-header">
+                <div class="wallet-title">XLM Wallet <span class="network-badge">Public Network</span></div>
+                <div class="wallet-address">
+                    <span>GABC1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+                    <button class="copy-btn" title="Copy address"><i class="fas fa-copy"></i></button>
                 </div>
-                <div class="form-group">
-                    <label for="amount">Amount:</label>
-                    <input type="number" id="amount" class="form-control" placeholder="Enter amount">
-                </div>
-                <div class="form-group">
-                    <label for="rate">Exchange Rate (ETB/XLM):</label>
-                    <input type="number" id="rate" class="form-control" placeholder="Rate per XLM" step="0.01">
-                </div>
-                <div class="form-group">
-                    <label for="payment">Payment Method:</label>
-                    <select id="payment" class="form-control">
-                        <option value="bank">Bank Transfer</option>
-                        <option value="telebirr">Telebirr</option>
-                        <option value="cash">Cash</option>
-                    </select>
-                </div>
-                <button class="btn">Post Offer</button>
             </div>
             
-            <div class="card">
-                <h2><i class="fas fa-calculator"></i> Quick Conversion</h2>
-                <div class="form-group">
-                    <label for="convert-from">From:</label>
-                    <div style="display: flex; gap: 10px;">
+            <div class="balance-section">
+                <div class="balance-label">Your XLM Balance</div>
+                <div class="balance-amount">1,248.50 XLM</div>
+                <div class="balance-fiat">≈ $125.60 USD</div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="action-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Send</span>
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-download"></i>
+                    <span>Receive</span>
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>Swap</span>
+                </button>
+                <button class="action-btn">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Assets</span>
+                </button>
+            </div>
+        </div>
+        
+        <!-- P2P Exchange Section -->
+        <div class="panel">
+            <h2 class="panel-title"><i class="fas fa-handshake"></i> P2P ETB/XLM Exchange</h2>
+            
+            <div class="tab-container">
+                <div class="tab active">Buy XLM</div>
+                <div class="tab">Sell XLM</div>
+            </div>
+            
+            <div class="exchange-container">
+                <div class="exchange-card">
+                    <h3><i class="fas fa-exchange-alt"></i> Create Trade</h3>
+                    <div class="form-group">
+                        <label for="trade-type">I want to:</label>
+                        <select id="trade-type" class="form-control">
+                            <option value="buy">Buy XLM with ETB</option>
+                            <option value="sell">Sell XLM for ETB</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount:</label>
+                        <input type="number" id="amount" class="form-control" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="rate">Exchange Rate (ETB/XLM):</label>
+                        <input type="number" id="rate" class="form-control" placeholder="Rate per XLM" step="0.01" value="32.5">
+                    </div>
+                    <div class="form-group">
+                        <label for="payment">Payment Method:</label>
+                        <select id="payment" class="form-control">
+                            <option value="ebirr">eBirr</option>
+                            <option value="telebirr">Telebirr</option>
+                            <option value="cbebirr">CBE Birr</option>
+                            <option value="coopay">Coopay</option>
+                            <option value="bank">Bank Transfer</option>
+                        </select>
+                    </div>
+                    <button class="btn">Post Trade Offer</button>
+                </div>
+                
+                <div class="exchange-card">
+                    <h3><i class="fas fa-calculator"></i> Quick Conversion</h3>
+                    <div class="form-group">
+                        <label for="convert-amount">Amount:</label>
+                        <input type="number" id="convert-amount" class="form-control" placeholder="Enter amount" value="1000">
+                    </div>
+                    <div class="form-group">
+                        <label for="convert-from">From:</label>
                         <select id="convert-from" class="form-control">
                             <option value="ETB">ETB - Ethiopian Birr</option>
                             <option value="XLM">XLM - Stellar Lumens</option>
                         </select>
-                        <input type="number" id="convert-amount" class="form-control" placeholder="Amount" value="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="convert-rate">Exchange Rate (ETB/XLM):</label>
+                        <input type="number" id="convert-rate" class="form-control" placeholder="Rate per XLM" step="0.01" value="32.5">
+                    </div>
+                    <div class="form-group">
+                        <label>Result:</label>
+                        <div style="padding: 15px; background: rgba(0, 0, 0, 0.2); border-radius: 8px; text-align: center; font-size: 1.2rem; font-weight: 700;">
+                            <span id="conversion-result">30.77</span> 
+                            <span id="conversion-currency">XLM</span>
+                        </div>
+                    </div>
+                    <button class="btn">Calculate</button>
+                </div>
+            </div>
+            
+            <h3 style="margin: 30px 0 20px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-credit-card"></i> Supported Payment Methods
+            </h3>
+            
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <div class="payment-icon"><i class="fas fa-mobile-alt" style="color: #4caf50;"></i></div>
+                    <div class="payment-info">
+                        <div class="payment-name">eBirr</div>
+                        <div class="payment-desc">Instant transfer</div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="convert-to">To:</label>
-                    <select id="convert-to" class="form-control">
-                        <option value="XLM">XLM - Stellar Lumens</option>
-                        <option value="ETB">ETB - Ethiopian Birr</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="exchange-rate">Exchange Rate (ETB/XLM):</label>
-                    <input type="number" id="exchange-rate" class="form-control" placeholder="Rate per XLM" step="0.01" value="32.5">
-                </div>
-                <div class="form-group">
-                    <label>Result:</label>
-                    <div style="padding: 15px; background: #f9f9f9; border-radius: 8px; text-align: center; font-size: 1.2rem; font-weight: 700;">
-                        <span id="conversion-result">0.00</span> 
-                        <span id="conversion-currency">XLM</span>
+                
+                <div class="payment-method">
+                    <div class="payment-icon"><i class="fas fa-money-bill-wave" style="color: #2196f3;"></i></div>
+                    <div class="payment-info">
+                        <div class="payment-name">Telebirr</div>
+                        <div class="payment-desc">Mobile money</div>
                     </div>
                 </div>
-                <button class="btn">Calculate</button>
-            </div>
-        </div>
-        
-        <div class="offer-list">
-            <h2><i class="fas fa-list"></i> Available Offers</h2>
-            
-            <div class="offer">
-                <div class="offer-details">
-                    <div class="offer-name">Abel T. <span class="currency-badge"><i class="fas fa-coins"></i> Selling XLM</span></div>
-                    <div class="offer-rate">Rate: <strong>31.5 ETB/XLM</strong></div>
-                    <div class="offer-limit">Limit: 500 - 5,000 ETB</div>
+                
+                <div class="payment-method">
+                    <div class="payment-icon"><i class="fas fa-university" style="color: #ff9800;"></i></div>
+                    <div class="payment-info">
+                        <div class="payment-name">CBE Birr</div>
+                        <div class="payment-desc">Bank transfer</div>
+                    </div>
                 </div>
-                <div class="offer-amount">2,450 XLM</div>
-                <div class="offer-action">
-                    <button class="action-btn">Trade</button>
-                </div>
-            </div>
-            
-            <div class="offer">
-                <div class="offer-details">
-                    <div class="offer-name">Meron A. <span class="currency-badge"><i class="fas fa-shopping-cart"></i> Buying XLM</span></div>
-                    <div class="offer-rate">Rate: <strong>33.0 ETB/XLM</strong></div>
-                    <div class="offer-limit">Limit: 1,000 - 10,000 ETB</div>
-                </div>
-                <div class="offer-amount">8,200 ETB</div>
-                <div class="offer-action">
-                    <button class="action-btn">Trade</button>
+                
+                <div class="payment-method">
+                    <div class="payment-icon"><i class="fas fa-hand-holding-usd" style="color: #9c27b0;"></i></div>
+                    <div class="payment-info">
+                        <div class="payment-name">Coopay</div>
+                        <div class="payment-desc">Cooperative bank</div>
+                    </div>
                 </div>
             </div>
             
-            <div class="offer">
-                <div class="offer-details">
-                    <div class="offer-name">Dawit K. <span class="currency-badge"><i class="fas fa-coins"></i> Selling XLM</span></div>
-                    <div class="offer-rate">Rate: <strong>32.0 ETB/XLM</strong></div>
-                    <div class="offer-limit">Limit: 200 - 2,000 ETB</div>
+            <div class="offers-list">
+                <h3 style="margin: 30px 0 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-list"></i> Available Offers
+                </h3>
+                
+                <div class="offer">
+                    <div class="offer-details">
+                        <div class="offer-name">Abel T. <span style="font-size: 0.9rem; opacity: 0.8;">(eBirr)</span></div>
+                        <div class="offer-rate">Rate: <strong>31.5 ETB/XLM</strong></div>
+                        <div class="offer-limit">Limit: 500 - 5,000 ETB</div>
+                    </div>
+                    <div class="offer-amount">2,450 XLM</div>
+                    <div class="offer-action">
+                        <button class="action-btn">Trade</button>
+                    </div>
                 </div>
-                <div class="offer-amount">1,250 XLM</div>
-                <div class="offer-action">
-                    <button class="action-btn">Trade</button>
+                
+                <div class="offer">
+                    <div class="offer-details">
+                        <div class="offer-name">Meron A. <span style="font-size: 0.9rem; opacity: 0.8;">(Telebirr)</span></div>
+                        <div class="offer-rate">Rate: <strong>33.0 ETB/XLM</strong></div>
+                        <div class="offer-limit">Limit: 1,000 - 10,000 ETB</div>
+                    </div>
+                    <div class="offer-amount">8,200 ETB</div>
+                    <div class="offer-action">
+                        <button class="action-btn">Trade</button>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="offer">
-                <div class="offer-details">
-                    <div class="offer-name">Selam H. <span class="currency-badge"><i class="fas fa-shopping-cart"></i> Buying XLM</span></div>
-                    <div class="offer-rate">Rate: <strong>32.8 ETB/XLM</strong></div>
-                    <div class="offer-limit">Limit: 500 - 5,000 ETB</div>
-                </div>
-                <div class="offer-amount">3,500 ETB</div>
-                <div class="offer-action">
-                    <button class="action-btn">Trade</button>
+                
+                <div class="offer">
+                    <div class="offer-details">
+                        <div class="offer-name">Dawit K. <span style="font-size: 0.9rem; opacity: 0.8;">(CBE Birr)</span></div>
+                        <div class="offer-rate">Rate: <strong>32.0 ETB/XLM</strong></div>
+                        <div class="offer-limit">Limit: 200 - 2,000 ETB</div>
+                    </div>
+                    <div class="offer-amount">1,250 XLM</div>
+                    <div class="offer-action">
+                        <button class="action-btn">Trade</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     
     <footer>
-        <p>Disclaimer: This is a frontend demonstration. Actual trading requires proper backend implementation and security measures.</p>
-        <p>© 2023 ETB/XLM P2P Exchange</p>
+        <p>P2P Exchange Platform © 2023 | Secure XLM/ETB Trading with Ethiopian Payment Methods</p>
+        <p>This is a UI demonstration. For actual trading, use official platforms with proper security measures.</p>
     </footer>
 
     <script>
-        // Simple conversion functionality
-        document.querySelector('.btn').addEventListener('click', function() {
+        // Copy functionality
+        document.querySelector('.copy-btn').addEventListener('click', function() {
+            const address = document.querySelector('.wallet-address span').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                }, 2000);
+            });
+        });
+        
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const tradeType = document.getElementById('trade-type');
+                if (tab.textContent === 'Buy XLM') {
+                    tradeType.value = 'buy';
+                } else {
+                    tradeType.value = 'sell';
+                }
+            });
+        });
+        
+        // Conversion functionality
+        document.querySelectorAll('.btn')[2].addEventListener('click', function() {
             const amount = parseFloat(document.getElementById('convert-amount').value);
-            const rate = parseFloat(document.getElementById('exchange-rate').value);
+            const rate = parseFloat(document.getElementById('convert-rate').value);
             const fromCurrency = document.getElementById('convert-from').value;
-            const toCurrency = document.getElementById('convert-to').value;
             
-            if (fromCurrency === 'ETB' && toCurrency === 'XLM') {
+            if (fromCurrency === 'ETB') {
                 const result = amount / rate;
                 document.getElementById('conversion-result').textContent = result.toFixed(2);
                 document.getElementById('conversion-currency').textContent = 'XLM';
-            } else if (fromCurrency === 'XLM' && toCurrency === 'ETB') {
+            } else {
                 const result = amount * rate;
                 document.getElementById('conversion-result').textContent = result.toFixed(2);
                 document.getElementById('conversion-currency').textContent = 'ETB';
-            } else {
-                document.getElementById('conversion-result').textContent = amount.toFixed(2);
-                document.getElementById('conversion-currency').textContent = fromCurrency;
             }
         });
-
+        
         // Initialize with a conversion
-        document.querySelector('.btn').click();
+        document.querySelectorAll('.btn')[2].click();
+        
+        // Balance animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const balanceElement = document.querySelector('.balance-amount');
+            const originalBalance = balanceElement.textContent;
+            balanceElement.textContent = '0.00 XLM';
+            
+            let balance = 0;
+            const targetBalance = parseFloat(originalBalance.replace(/[^0-9.]/g, ''));
+            const increment = targetBalance / 100;
+            
+            const interval = setInterval(() => {
+                balance += increment;
+                if (balance >= targetBalance) {
+                    balance = targetBalance;
+                    clearInterval(interval);
+                }
+                balanceElement.textContent = balance.toLocaleString('en-US', {
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2
+                }) + ' XLM';
+            }, 20);
+        });
     </script>
 </body>
-  </html>
+</html>
