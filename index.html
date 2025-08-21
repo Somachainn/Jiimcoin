@@ -287,7 +287,7 @@
             margin-left: 15px;
         }
         
-        .action-btn {
+        .trade-btn {
             background: #1a2980;
             color: white;
             border: none;
@@ -298,7 +298,7 @@
             transition: background 0.3s;
         }
         
-        .action-btn:hover {
+        .trade-btn:hover {
             background: #26d0ce;
         }
         
@@ -341,11 +341,6 @@
             font-size: 2.8rem;
         }
         
-        .ethereum-logo {
-            color: #26d0ce;
-            font-size: 2.8rem;
-        }
-        
         .network-badge {
             background: rgba(79, 195, 247, 0.2);
             padding: 5px 10px;
@@ -373,6 +368,63 @@
         .tab.active {
             background: rgba(79, 195, 247, 0.2);
             font-weight: 600;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: #2c5364;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: #4fc3f7;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: none;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -402,19 +454,19 @@
             </div>
             
             <div class="action-buttons">
-                <button class="action-btn">
+                <button class="action-btn" onclick="openModal('sendModal')">
                     <i class="fas fa-paper-plane"></i>
                     <span>Send</span>
                 </button>
-                <button class="action-btn">
+                <button class="action-btn" onclick="openModal('receiveModal')">
                     <i class="fas fa-download"></i>
                     <span>Receive</span>
                 </button>
-                <button class="action-btn">
+                <button class="action-btn" onclick="openModal('swapModal')">
                     <i class="fas fa-exchange-alt"></i>
                     <span>Swap</span>
                 </button>
-                <button class="action-btn">
+                <button class="action-btn" onclick="openModal('assetsModal')">
                     <i class="fas fa-chart-line"></i>
                     <span>Assets</span>
                 </button>
@@ -426,8 +478,8 @@
             <h2 class="panel-title"><i class="fas fa-handshake"></i> P2P ETB/XLM Exchange</h2>
             
             <div class="tab-container">
-                <div class="tab active">Buy XLM</div>
-                <div class="tab">Sell XLM</div>
+                <div class="tab active" onclick="switchTab('buy')">Buy XLM</div>
+                <div class="tab" onclick="switchTab('sell')">Sell XLM</div>
             </div>
             
             <div class="exchange-container">
@@ -458,7 +510,7 @@
                             <option value="bank">Bank Transfer</option>
                         </select>
                     </div>
-                    <button class="btn">Post Trade Offer</button>
+                    <button class="btn" onclick="createTrade()">Post Trade Offer</button>
                 </div>
                 
                 <div class="exchange-card">
@@ -485,7 +537,7 @@
                             <span id="conversion-currency">XLM</span>
                         </div>
                     </div>
-                    <button class="btn">Calculate</button>
+                    <button class="btn" onclick="calculateConversion()">Calculate</button>
                 </div>
             </div>
             
@@ -532,40 +584,8 @@
                     <i class="fas fa-list"></i> Available Offers
                 </h3>
                 
-                <div class="offer">
-                    <div class="offer-details">
-                        <div class="offer-name">Abel T. <span style="font-size: 0.9rem; opacity: 0.8;">(eBirr)</span></div>
-                        <div class="offer-rate">Rate: <strong>31.5 ETB/XLM</strong></div>
-                        <div class="offer-limit">Limit: 500 - 5,000 ETB</div>
-                    </div>
-                    <div class="offer-amount">2,450 XLM</div>
-                    <div class="offer-action">
-                        <button class="action-btn">Trade</button>
-                    </div>
-                </div>
-                
-                <div class="offer">
-                    <div class="offer-details">
-                        <div class="offer-name">Meron A. <span style="font-size: 0.9rem; opacity: 0.8;">(Telebirr)</span></div>
-                        <div class="offer-rate">Rate: <strong>33.0 ETB/XLM</strong></div>
-                        <div class="offer-limit">Limit: 1,000 - 10,000 ETB</div>
-                    </div>
-                    <div class="offer-amount">8,200 ETB</div>
-                    <div class="offer-action">
-                        <button class="action-btn">Trade</button>
-                    </div>
-                </div>
-                
-                <div class="offer">
-                    <div class="offer-details">
-                        <div class="offer-name">Dawit K. <span style="font-size: 0.9rem; opacity: 0.8;">(CBE Birr)</span></div>
-                        <div class="offer-rate">Rate: <strong>32.0 ETB/XLM</strong></div>
-                        <div class="offer-limit">Limit: 200 - 2,000 ETB</div>
-                    </div>
-                    <div class="offer-amount">1,250 XLM</div>
-                    <div class="offer-action">
-                        <button class="action-btn">Trade</button>
-                    </div>
+                <div id="offers-container">
+                    <!-- Offers will be dynamically added here -->
                 </div>
             </div>
         </div>
@@ -576,57 +596,118 @@
         <p>This is a UI demonstration. For actual trading, use official platforms with proper security measures.</p>
     </footer>
 
+    <!-- Send Modal -->
+    <div class="modal" id="sendModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-paper-plane"></i> Send XLM</h3>
+                <button class="close-btn" onclick="closeModal('sendModal')">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="recipient">Recipient Address:</label>
+                <input type="text" id="recipient" class="form-control" placeholder="Enter Stellar address">
+            </div>
+            <div class="form-group">
+                <label for="send-amount">Amount (XLM):</label>
+                <input type="number" id="send-amount" class="form-control" placeholder="Enter amount">
+            </div>
+            <div class="form-group">
+                <label for="memo">Memo (optional):</label>
+                <input type="text" id="memo" class="form-control" placeholder="Enter memo">
+            </div>
+            <button class="btn" onclick="sendXLM()">Send XLM</button>
+        </div>
+    </div>
+
+    <!-- Receive Modal -->
+    <div class="modal" id="receiveModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-download"></i> Receive XLM</h3>
+                <button class="close-btn" onclick="closeModal('receiveModal')">&times;</button>
+            </div>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <div style="padding: 20px; background: white; border-radius: 12px; display: inline-block;">
+                    <i class="fas fa-qrcode" style="font-size: 150px; color: #333;"></i>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Your Stellar Address:</label>
+                <div class="wallet-address" style="justify-content: center;">
+                    <span>GABC1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ</span>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">
+                Share this address or QR code to receive XLM payments.
+            </p>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Operation completed successfully!
+    </div>
+
     <script>
-        // Copy functionality
-        document.querySelector('.copy-btn').addEventListener('click', function() {
-            const address = document.querySelector('.wallet-address span').textContent;
-            navigator.clipboard.writeText(address).then(() => {
-                const originalHTML = this.innerHTML;
-                this.innerHTML = '<i class="fas fa-check"></i>';
-                setTimeout(() => {
-                    this.innerHTML = originalHTML;
-                }, 2000);
-            });
-        });
-        
-        // Tab functionality
-        const tabs = document.querySelectorAll('.tab');
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                const tradeType = document.getElementById('trade-type');
-                if (tab.textContent === 'Buy XLM') {
-                    tradeType.value = 'buy';
-                } else {
-                    tradeType.value = 'sell';
-                }
-            });
-        });
-        
-        // Conversion functionality
-        document.querySelectorAll('.btn')[2].addEventListener('click', function() {
-            const amount = parseFloat(document.getElementById('convert-amount').value);
-            const rate = parseFloat(document.getElementById('convert-rate').value);
-            const fromCurrency = document.getElementById('convert-from').value;
-            
-            if (fromCurrency === 'ETB') {
-                const result = amount / rate;
-                document.getElementById('conversion-result').textContent = result.toFixed(2);
-                document.getElementById('conversion-currency').textContent = 'XLM';
-            } else {
-                const result = amount * rate;
-                document.getElementById('conversion-result').textContent = result.toFixed(2);
-                document.getElementById('conversion-currency').textContent = 'ETB';
+        // Sample offers data
+        const sampleOffers = [
+            {
+                name: "Abel T.",
+                payment: "eBirr",
+                rate: 31.5,
+                limit: "500 - 5,000 ETB",
+                amount: "2,450 XLM",
+                type: "sell"
+            },
+            {
+                name: "Meron A.",
+                payment: "Telebirr",
+                rate: 33.0,
+                limit: "1,000 - 10,000 ETB",
+                amount: "8,200 ETB",
+                type: "buy"
+            },
+            {
+                name: "Dawit K.",
+                payment: "CBE Birr",
+                rate: 32.0,
+                limit: "200 - 2,000 ETB",
+                amount: "1,250 XLM",
+                type: "sell"
             }
-        });
-        
-        // Initialize with a conversion
-        document.querySelectorAll('.btn')[2].click();
-        
-        // Balance animation
+        ];
+
+        // Initialize with sample offers
         document.addEventListener('DOMContentLoaded', function() {
+            renderOffers();
+            initializeBalance();
+        });
+
+        // Render offers to the page
+        function renderOffers() {
+            const offersContainer = document.getElementById('offers-container');
+            offersContainer.innerHTML = '';
+            
+            sampleOffers.forEach(offer => {
+                const offerElement = document.createElement('div');
+                offerElement.className = 'offer';
+                offerElement.innerHTML = `
+                    <div class="offer-details">
+                        <div class="offer-name">${offer.name} <span style="font-size: 0.9rem; opacity: 0.8;">(${offer.payment})</span></div>
+                        <div class="offer-rate">Rate: <strong>${offer.rate} ETB/XLM</strong></div>
+                        <div class="offer-limit">Limit: ${offer.limit}</div>
+                    </div>
+                    <div class="offer-amount">${offer.amount}</div>
+                    <div class="offer-action">
+                        <button class="trade-btn" onclick="startTrade('${offer.name}', ${offer.rate})">Trade</button>
+                    </div>
+                `;
+                offersContainer.appendChild(offerElement);
+            });
+        }
+
+        // Initialize balance with animation
+        function initializeBalance() {
             const balanceElement = document.querySelector('.balance-amount');
             const originalBalance = balanceElement.textContent;
             balanceElement.textContent = '0.00 XLM';
@@ -646,7 +727,119 @@
                     minimumFractionDigits: 2
                 }) + ' XLM';
             }, 20);
+        }
+
+        // Copy functionality
+        document.querySelector('.copy-btn').addEventListener('click', function() {
+            const address = document.querySelector('.wallet-address span').textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                const originalHTML = this.innerHTML;
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    this.innerHTML = originalHTML;
+                }, 2000);
+            });
         });
+
+        // Tab functionality
+        function switchTab(tab) {
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            if (tab === 'buy') {
+                tabs[0].classList.add('active');
+                document.getElementById('trade-type').value = 'buy';
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('trade-type').value = 'sell';
+            }
+        }
+
+        // Conversion functionality
+        function calculateConversion() {
+            const amount = parseFloat(document.getElementById('convert-amount').value);
+            const rate = parseFloat(document.getElementById('convert-rate').value);
+            const fromCurrency = document.getElementById('convert-from').value;
+            
+            if (fromCurrency === 'ETB') {
+                const result = amount / rate;
+                document.getElementById('conversion-result').textContent = result.toFixed(2);
+                document.getElementById('conversion-currency').textContent = 'XLM';
+            } else {
+                const result = amount * rate;
+                document.getElementById('conversion-result').textContent = result.toFixed(2);
+                document.getElementById('conversion-currency').textContent = 'ETB';
+            }
+        }
+
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Create trade function
+        function createTrade() {
+            const tradeType = document.getElementById('trade-type').value;
+            const amount = document.getElementById('amount').value;
+            const rate = document.getElementById('rate').value;
+            const payment = document.getElementById('payment').value;
+            
+            if (!amount || !rate) {
+                showNotification('Please fill in all required fields');
+                return;
+            }
+            
+            const offerType = tradeType === 'buy' ? 'Buying' : 'Selling';
+            showNotification(`Trade offer created: ${offerType} ${amount} XLM at ${rate} ETB/XLM via ${payment}`);
+            closeModal('createTradeModal');
+        }
+
+        // Send XLM function
+        function sendXLM() {
+            const recipient = document.getElementById('recipient').value;
+            const amount = document.getElementById('send-amount').value;
+            
+            if (!recipient || !amount) {
+                showNotification('Please fill in all required fields');
+                return;
+            }
+            
+            showNotification(`Sent ${amount} XLM to ${recipient}`);
+            closeModal('sendModal');
+        }
+
+        // Start trade function
+        function startTrade(name, rate) {
+            showNotification(`Starting trade with ${name} at rate ${rate} ETB/XLM`);
+        }
+
+        // Initialize conversion on page load
+        calculateConversion();
     </script>
 </body>
 </html>
