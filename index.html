@@ -111,6 +111,7 @@
   font-size: 1.05rem;
   transition: all .25s ease;
   box-shadow: 0 5px 14px rgba(0,0,0,.18);
+  cursor: pointer;
 }
 
 /* Wallet button */
@@ -127,6 +128,10 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
+  transition: transform 0.6s ease;
+}
+.btn-wallet:hover img {
+  transform: rotate(360deg);
 }
 
 /* Explorer button */
@@ -142,7 +147,7 @@
 </style>
 
 <div class="token-buttons">
-  <!-- ✅ Wallet button with custom image icon -->
+  <!-- ✅ Wallet button with rotating icon -->
   <a href="Laam.html" class="btn btn-wallet" aria-label="Open Laam Wallet">
     <img src="https://i.ibb.co/tPQZ1XN0/20250821-231616.jpg" alt="Wallet Icon">
     Laam Wallet
