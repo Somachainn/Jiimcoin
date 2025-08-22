@@ -19,6 +19,27 @@
     <meta property="og:type" content="website">
 
     <style>
+        /* ---- ✅ Animation Keyframes ---- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
         /* ---- General Styles ---- */
         * {
             margin: 0;
@@ -31,11 +52,14 @@
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
+            flex-grow: 1;
         }
 
         /* ---- Header ---- */
@@ -47,6 +71,7 @@
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease-out forwards; /* Animation added */
         }
         .logo {
             max-width: 120px;
@@ -55,7 +80,7 @@
             transition: transform 0.3s ease;
         }
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.1); /* Changed from 1.05 for more effect */
         }
         .title {
             font-size: 3rem;
@@ -78,6 +103,8 @@
             border-radius: 15px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards; /* Animation with delay */
+            opacity: 0; /* Start hidden for animation */
         }
         .content-title {
             font-size: 1.8rem;
@@ -121,10 +148,11 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             border: none;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .btn-wallet:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px); /* More noticeable hover effect */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
         }
         .btn-wallet img {
             width: 105px;
@@ -144,12 +172,15 @@
         }
         .btn-explorer:hover {
             background-color: #fdfdfd;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         /* ---- Widgets ---- */
         .widgets-container {
             margin-top: 20px;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards; /* Animation with more delay */
+            opacity: 0; /* Start hidden */
         }
         .widget-wrapper {
             margin-bottom: 30px;
@@ -163,13 +194,49 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
         
+        /* ---- Social Media Buttons ---- */
+        .social-buttons {
+            text-align: center;
+            margin-top: 40px;
+            padding-bottom: 20px;
+            animation: fadeIn 1s ease-out 0.6s forwards; /* Fade-in animation */
+            opacity: 0; /* Start hidden */
+        }
+        .social-buttons a {
+            margin: 0 12px;
+            display: inline-block;
+        }
+        .social-buttons img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .social-buttons a:hover img {
+            transform: scale(1.15); /* More pop on hover */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        /* ---- Footer ---- */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: white;
+            font-size: 0.9rem;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
         /* ---- Responsive Design for Mobile ---- */
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
             }
-            .header {
-                padding: 20px;
+            .header, .content-section, .widgets-container, .social-buttons {
+                animation: none; /* Disable animations on mobile for performance */
+                opacity: 1; /* Ensure they are visible */
             }
             .title {
                 font-size: 2.2rem;
@@ -177,14 +244,12 @@
             .subtitle {
                 font-size: 1rem;
             }
-            .content-section {
-                padding: 20px;
-            }
             .content-title {
                 font-size: 1.5rem;
             }
-            .token-buttons {
-                gap: 15px;
+            .social-buttons img {
+                width: 40px;
+                height: 40px;
             }
         }
     </style>
@@ -205,7 +270,6 @@
             <h2 class="content-title">What is Laam Token?</h2>
             <div class="content-text">
                 <p><span class="highlight">Laam</span> is a native token built on the <span class="stellar-highlight">Stellar</span> network, designed to be a modern solution for digital currency. It has a fixed supply minted only once to preserve scarcity and long-term value.</p>
-
                 <div class="token-buttons">
                     <a href="Laam.html" class="btn-wallet" aria-label="Open Laam Wallet">
                         <img src="https://i.ibb.co/JWB2sKtW/20250822-013938.png" alt="Wallet Icon">
@@ -214,7 +278,6 @@
                         Explorer
                     </a>
                 </div>
-              
                 <p>Laam is an open project aimed at supporting real-world use cases such as property sales, vehicle rentals, and community-based commerce.</p>
                 <p>The token is designed to be <span class="highlight">secure</span>, <span class="highlight">non-inflationary</span>, and <span class="highlight">fully tradable</span>.</p>
             </div>
@@ -226,12 +289,35 @@
                 <div class="widget-label">Live Cryptocurrency Market</div>
                 <div class="livecoinwatch-widget-5" lcw-base="USD" lcw-color-tx="#FFFFFF" lcw-color-bg="rgba(31, 34, 43, 0.8)" lcw-border-w="1"></div>
             </div>
-            
             <div class="widget-wrapper">
                 <div class="widget-label">Laam Token Summary</div>
                 <iframe onLoad="var c=this;window.addEventListener('message',function({data,source}){if(c&&source===c.contentWindow&&data.widget===c.src)c.style.height=data.height+'px'},false);" src="https://stellar.expert/widget/public/asset/summary/Laam-GAL4ECDAXNBMJYFCWIJ32HKVIRLCNEXY664CAZYI3EINQWPLXTMEPR64" style="border:none; overflow:hidden; width:100%; min-height:200px; border-radius: 10px;"></iframe>
             </div>
         </div>
+
+        <!-- SOCIAL MEDIA BUTTONS -->
+        <div class="social-buttons">
+            <a href="https://t.me/laamcoin" target="_blank" aria-label="Telegram">
+                <img src="https://i.ibb.co/Yc5Z25j/telegram-icon.png" alt="Telegram Icon">
+            </a>
+            <a href="https://www.instagram.com/laamcoin" target="_blank" aria-label="Instagram">
+                <img src="https://i.ibb.co/VqB3b3p/instagram-icon.png" alt="Instagram Icon">
+            </a>
+            <a href="https://youtube.com/@laamcoin" target="_blank" aria-label="YouTube">
+                <img src="https://i.ibb.co/wYyF3M4/youtube-icon.png" alt="YouTube Icon">
+            </a>
+        </div>
+
     </div>
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer">
+        <p>&copy; <span id="current-year"></span> Laam Project. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Automatically update the year in the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
